@@ -250,21 +250,18 @@
     let pieces = ele.split(" ");
     let analyze = {};
 
-    analyze.min = pieces[0].split("-")[0];
-    analyze.max = pieces[0].split("-")[1];
+    analyze.a = pieces[0].split("-")[0];
+    analyze.b = pieces[0].split("-")[1];
     analyze.char = pieces[1].split(":")[0];
     analyze.str = pieces[2]
 
-    let regex = new RegExp(analyze.char, 'g');
-    let match = analyze.str.match(regex);
-    
-    if (match) {
-      let count = match.length;
-      if (count >= analyze.min && count <= analyze.max) {
-        valid++;
-      }
-    }
+    let count = 0;
+    analyze.str[analyze.a-1] === analyze.char ? count++ : 0;
+    analyze.str[analyze.b-1] === analyze.char ? count++ : 0;
 
+    if (count == 1) {
+      valid++;
+    }
   })
   
   console.log("Number of valid passwords:",valid);
