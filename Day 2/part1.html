@@ -244,22 +244,30 @@
     "7-10 h: phdkrrhkmhh", "2-11 j: jjjjjjjjjjtzjjjjg", "3-4 g: gxfgggg", "1-3 f: fwtdf", "8-9 d: bjqxpvzdddx",
     "7-15 c: vcccccccccccccccc", "1-7 n: tvnpzhn", "1-2 v: ktvv", "2-3 g: gpggg", "7-13 d: fddcdfgvbmpdd",
     "4-5 s: rsssw", "2-14 c: jckbwnnlkcmvnwtj"]
+  let valid = 0
 
-  // array.forEach(ele => {
-  //   console.log(ele.split(" "));
-  // })
+  array.forEach(ele => {
+    let pieces = ele.split(" ");
+    let analyze = {};
 
-  let cheese = array[0].split(" ");
-  let analyze = {};
-  analyze.min = cheese[0].split("-")[0];
-  analyze.max = cheese[0].split("-")[1];
-  analyze.char = cheese[1].split(":")[0];
-  analyze.str = cheese[2]
-  let regex = `/[${analyze.char}]{${analyze.min},${analyze.max}}/g`;
-  console.log(regex);
-  console.log(analyze);
-  console.log(analyze.str.match(regex));
+    analyze.min = pieces[0].split("-")[0];
+    analyze.max = pieces[0].split("-")[1];
+    analyze.char = pieces[1].split(":")[0];
+    analyze.str = pieces[2]
 
+    let regex = new RegExp(analyze.char, 'g');
+    let match = analyze.str.match(regex);
+    
+    if (match) {
+      let count = match.length;
+      if (count >= analyze.min && count <= analyze.max) {
+        valid++;
+      }
+    }
+
+  })
+  
+  console.log("Number of valid passwords:",valid);
 </script>
 
 </html>
